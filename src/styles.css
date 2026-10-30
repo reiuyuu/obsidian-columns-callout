@@ -1,0 +1,16 @@
+.cols {
+  margin-block-start: var(--p-spacing);
+  margin-block-end: var(--p-spacing);
+}
+
+.col > :first-child {
+  margin-block-start: 0;
+}
+
+.col > :last-child {
+  margin-block-end: 0;
+}
+
+.col hr {
+  margin: 1rem 0;
+}
