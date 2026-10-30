@@ -2,8 +2,8 @@
   "id": "columns-callout",
   "name": "Columns Callout",
   "version": "1.0.0",
-  "minAppVersion": "1.0.0",
-  "description": "Creates multi-column layouts within callouts.",
+  "minAppVersion": "0.14.2",
+  "description": "Create multi-column layouts with callout.",
   "author": "reiuyuu",
   "isDesktopOnly": false
 }
