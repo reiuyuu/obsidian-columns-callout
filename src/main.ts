@@ -1,29 +1,27 @@
 import { Plugin } from "obsidian";
 
-const DEFAULT_GAP = "1rem";
+function parseOptions(spec: string): { ratios: string[] | null; gap: string | null } {
+  let ratios: string[] | null = null;
+  let gap: string | null = null;
 
-function parseOptions(spec: string): { ratio: string[] | null; gap: string } {
-  let ratio: string[] | null = null;
-  let gap = DEFAULT_GAP;
+  spec
+    .split(/,\s*/)
+    .filter(Boolean)
+    .forEach((option) => {
+      const [key, value] = option.split("=");
+      if (key === "r") ratios = value.split(":");
+      if (key === "g") gap = value;
+    });
 
-  spec.split(/,\s*/).filter(Boolean).forEach((token) => {
-    const [key, value] = token.split("=");
-    if (key === "r") ratio = value.split(":");
-    if (key === "g") gap = value;
-  });
-
-  return { ratio, gap };
+  return { ratios, gap };
 }
 
 function splitColumns(nodes: Element[]): Element[][] {
-  const groups: Element[][] = [[]];
-
-  nodes.forEach((node) => {
-    if (node.textContent?.trim() === "+++") groups.push([]);
-    else groups[groups.length - 1].push(node);
-  });
-
-  return groups;
+  const columns: Element[][] = [[]];
+  nodes.forEach((node) =>
+    node.textContent.trim() === "+++" ? columns.push([]) : columns[columns.length - 1].push(node),
+  );
+  return columns;
 }
 
 export default class ColumnsCallout extends Plugin {
@@ -31,24 +29,24 @@ export default class ColumnsCallout extends Plugin {
     this.registerMarkdownPostProcessor((element) => {
       element.querySelectorAll('.callout[data-callout="cols"]').forEach((callout) => {
         const title = callout.querySelector(".callout-title-inner")?.textContent ?? "";
-        const { ratio, gap } = parseOptions(title);
+        const { ratios, gap } = parseOptions(title);
         const content = callout.querySelector(".callout-content");
         if (!content) return;
 
-        const groups = splitColumns(Array.from(content.children));
+        const columns = splitColumns(Array.from(content.children));
         const grid = document.createElement("div");
-        grid.className = "cols";
-        grid.style.display = "grid";
-        grid.style.gridTemplateColumns = (ratio ?? Array(groups.length).fill("1"))
-          .map((value) => `${value}fr`)
-          .join(" ");
-        grid.style.gap = gap;
+        grid.className = "columns-callout-grid";
+        grid.style.setProperty(
+          "--columns-callout-template",
+          (ratios ?? Array(columns.length).fill("1")).map((r) => `${r}fr`).join(" "),
+        );
+        if (gap !== null) grid.style.setProperty("--columns-callout-gap", gap);
 
-        groups.forEach((nodes) => {
-          const column = document.createElement("div");
-          column.className = "col";
-          nodes.forEach((node) => column.appendChild(node));
-          grid.appendChild(column);
+        columns.forEach((nodes) => {
+          const col = document.createElement("div");
+          col.className = "columns-callout-col";
+          col.append(...nodes);
+          grid.appendChild(col);
         });
 
         callout.replaceWith(grid);

@@ -1,16 +1,21 @@
-.cols {
+.columns-callout-grid {
+  --columns-callout-gap: 1rem;
+
+  display: grid;
+  grid-template-columns: var(--columns-callout-template);
+  gap: var(--columns-callout-gap);
   margin-block-start: var(--p-spacing);
   margin-block-end: var(--p-spacing);
 }
 
-.col > :first-child {
+.columns-callout-col > :first-child {
   margin-block-start: 0;
 }
 
-.col > :last-child {
+.columns-callout-col > :last-child {
   margin-block-end: 0;
 }
 
-.col hr {
+.columns-callout-col hr {
   margin: 1rem 0;
 }
