@@ -24,4 +24,4 @@ Options (callout title):
 
 ## Example
 
-![Columns Callout example in Obsidian](assets/columns-callout-example.png)
+<img src="assets/columns-callout-example.png" alt="Columns Callout example in Obsidian" width="580">
