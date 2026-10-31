@@ -1,5 +1,3 @@
-# Columns Callout
-
 Create multi-column layouts with `[!cols]` callout.
 
 Columns are separated with `+++`.
@@ -21,7 +19,3 @@ Options (callout title):
 ```md
 > [!cols] r=2:1, g=2rem
 ```
-
-## License
-
-MIT
