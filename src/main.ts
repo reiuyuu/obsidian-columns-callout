@@ -4,14 +4,11 @@ function parseOptions(spec: string): { ratios: string[] | null; gap: string | nu
   let ratios: string[] | null = null;
   let gap: string | null = null;
 
-  spec
-    .split(/,\s*/)
-    .filter(Boolean)
-    .forEach((option) => {
-      const [key, value] = option.split("=");
-      if (key === "r") ratios = value.split(":");
-      if (key === "g") gap = value;
-    });
+  for (const option of spec.split(/,\s*/).filter(Boolean)) {
+    const [key, value] = option.split("=");
+    if (key === "r") ratios = value.split(":");
+    if (key === "g") gap = value;
+  }
 
   return { ratios, gap };
 }
