@@ -1,7 +1,7 @@
 {
   "name": "columns-callout",
   "version": "1.0.0",
-  "description": "Creates multi-column layouts within callouts.",
+  "description": "Create multi-column layouts with callout.",
   "private": true,
   "type": "module",
   "author": "reiuyuu",
