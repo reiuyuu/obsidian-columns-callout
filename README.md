@@ -1,3 +1,5 @@
+## Overview
+
 Create multi-column layouts with `[!cols]` callout.
 
 Columns are separated with `+++`.
@@ -14,8 +16,12 @@ Columns are separated with `+++`.
 Options (callout title):
 
 - `r` — column ratios (default: equal)
-- `g` — column gap    (default: 1rem)
+- `g` — column gap    (default: 1rem) 
 
 ```md
 > [!cols] r=2:1, g=2rem
 ```
+
+## Example
+
+![Columns Callout example in Obsidian](assets/columns-callout-example.png)
