@@ -8,11 +8,14 @@
   "license": "MIT",
   "scripts": {
     "dev": "node esbuild.config.mjs",
+    "lint": "eslint .",
     "build": "tsc --noEmit && node esbuild.config.mjs production"
   },
   "devDependencies": {
     "esbuild": "^0.28.2",
+    "eslint": "^10.14.0",
+    "eslint-plugin-obsidianmd": "^0.4.2",
     "obsidian": "latest",
-    "typescript": "^7.0.2"
+    "typescript": "^6.0.3"
   }
 }

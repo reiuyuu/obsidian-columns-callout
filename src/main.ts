@@ -34,7 +34,7 @@ export default class ColumnsCallout extends Plugin {
         if (!content) return;
 
         const columns = splitColumns(Array.from(content.children));
-        const grid = document.createElement("div");
+        const grid = createDiv();
         grid.className = "columns-callout-grid";
         grid.style.setProperty(
           "--columns-callout-template",
@@ -43,7 +43,7 @@ export default class ColumnsCallout extends Plugin {
         if (gap !== null) grid.style.setProperty("--columns-callout-gap", gap);
 
         columns.forEach((nodes) => {
-          const col = document.createElement("div");
+          const col = createDiv();
           col.className = "columns-callout-col";
           col.append(...nodes);
           grid.appendChild(col);
